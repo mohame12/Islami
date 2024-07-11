@@ -8,7 +8,10 @@ import 'package:islamic/views/elsoura_view.dart';
 import 'package:islamic/widgets/item_qoran_list.dart';
 
 class QoraanVeiw extends StatelessWidget {
+  static const String id='Qoraan_tap';
    QoraanVeiw({super.key});
+
+
 
      List<String>suras_ar=["الفاتحه","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود"
   ,"يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون"
@@ -23,60 +26,68 @@ class QoraanVeiw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HadethCubit, HadethState>(
-       bloc: HadethCubit.get(context)..aya(),
+    return BlocConsumer<HadethCubit, HadethState>(
+      bloc: HadethCubit.get(context)..aya(),
+  buildWhen: (previous, current) => current is AyaSuccessdata,
+  listener: (context, state) {
+  },
   builder: (context, state) {
+    var cubit=HadethCubit.get(context);
+    var h=cubit.ayas;
+    print(h);
+    if(state is AyaSuccessdata)
+      {
+        return Scaffold(
+            backgroundColor: Colors.transparent,
+            body:
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image(image: AssetImage('assets/images/Fanos.png')),
+                Divider(
+                  thickness: 3,
+                  color: Color(0xffB7935F),
+                ),
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(flex: 1,),
+                    Text('عدد الأيات', style: TextStyle(
+                        fontFamily: 'ElMessiri', fontSize: 25),),
+                    Spacer(flex: 1,),
+                    Text('اسم السورة', style: TextStyle(
+                        fontFamily: 'ElMessiri', fontSize: 25),),
+                    Spacer(flex: 1,)
 
-           return Scaffold(
-               backgroundColor: Colors.transparent,
-               body:
-               Column(
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                   Image(image: AssetImage('assets/images/Fanos.png')),
-                   Divider(
-                     thickness: 3,
-                     color: Color(0xffB7935F),
-                   ),
-                   Row(
-                     // mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       Spacer(flex: 1,),
-                       Text('عدد الأيات', style: TextStyle(
-                           fontFamily: 'ElMessiri', fontSize: 25),),
-                       Spacer(flex: 1,),
-                       Text('اسم السورة', style: TextStyle(
-                           fontFamily: 'ElMessiri', fontSize: 25),),
-                       Spacer(flex: 1,)
+                  ],
+                ),
+                Divider(
+                  thickness: 3,
+                  color: Color(0xffB7935F),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
 
-                     ],
-                   ),
-                   Divider(
-                     thickness: 3,
-                     color: Color(0xffB7935F),
-                   ),
-                   Expanded(
-                     child: ListView.builder(
-                         physics: BouncingScrollPhysics(),
-
-                         itemBuilder: (context, index) =>
-                             GestureDetector(
-                                 onTap: () {
-                                   Navigator.pushNamed(context, ElsouraView.id,
-                                       arguments: QoranModel(
-                                           soraName: suras_ar[index],
-                                           index: index));
-                                 },
-                                 child: ItemQoranList(soraName: suras_ar[index],
-                                   ayanums: '${HadethCubit
-                                       .get(context)
-                                       .ayalist[index]}',)),
-                         itemCount: suras_ar.length),
-                   )
-                 ],
-               )
-           );
-
+                      itemBuilder: (context, index) =>
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, ElsouraView.id,
+                                    arguments: QoranModel(
+                                        soraName: suras_ar[index],
+                                        index: index));
+                              },
+                              child: ItemQoranList(soraName: suras_ar[index],
+                                ayanums: '${h[index]}',)),
+                      itemCount:114 ),
+                )
+              ],
+            )
+        );
+      }
+    else{
+      return Center(child: CircularProgressIndicator(color: Colors.orange,));
+    }
   },
 );
   }
