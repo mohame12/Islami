@@ -64,14 +64,17 @@ print(h);
                 Divider(thickness: 1,color: Color(0xffB7935F),indent: 50,endIndent: 50,),
 
                 Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (BuildContext context, int index)=>
-                     Text(
-                      h[index] ,
-                      textAlign: TextAlign.center,
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 20,),),
-                    itemCount: h.length,
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(top:8 ,start:8 ,end:8 ),
+                    child: ListView.builder(
+                      itemBuilder: (BuildContext context, int index)=>
+                       Text(
+                        h[index] ,
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: 20,),),
+                      itemCount: h.length,
+                    ),
                   ),
                 ),
 
