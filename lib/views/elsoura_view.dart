@@ -21,10 +21,6 @@ class _ElsouraViewState extends State<ElsouraView> {
   Widget build(BuildContext context) {
     QoranModel model=ModalRoute.of(context)?.settings.arguments as QoranModel;
     indx=model.index;
-    // if(surav.isEmpty)
-    //   {
-    //     loadfiles(index: model.index);
-    //   }
     return
       BlocBuilder<HadethCubit, HadethState>(
         bloc: HadethCubit.get(context)..loadfiles(index: indx),
@@ -36,19 +32,8 @@ class _ElsouraViewState extends State<ElsouraView> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Row(
-            children: [
-              IconButton(onPressed: (){
-                Navigator.pop(context);
-              }, icon: Icon(Icons.arrow_back)),
-              Spacer(flex: 1,),
-              SizedBox(width: 25,),
-              Text('اسلامي',style: TextStyle(fontFamily: 'ElMessiri',fontSize: 30),),
-              Spacer(flex: 2),
-            ],
-          ),
+          title: Center(child: Text('اسلامي',style: TextStyle(fontFamily: 'ElMessiri',fontSize: 30),)),
 
         ),
 

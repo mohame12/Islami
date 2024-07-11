@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic/cubits/hadeth_cubit.dart';
+import 'package:islamic/nav_taps/qoraan_tap.dart';
 import 'package:islamic/views/ahadeth_view.dart';
 import 'package:islamic/views/elsoura_view.dart';
 import 'package:islamic/views/home_view.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           SplashScreen.id:(context)=>const SplashScreen(),
           ElsouraView.id:(context)=> ElsouraView(),
           AhadethView.id:(context)=>AhadethView(),
+          QoraanVeiw.id:(context)=>QoraanVeiw(),
         },
       ),
     );

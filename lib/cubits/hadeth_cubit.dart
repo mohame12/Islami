@@ -39,24 +39,25 @@ class HadethCubit extends Cubit<HadethState>
     emit(CounterState());
   }
 
-  List<int>ayalist=[];
-  List<String>h=[];
-  aya()
-  {
+
+  List<int> ayas=[];
+  List<String> ayalist=[];
+Future<void>aya()
+async {
+
+  emit(AyaLoadingdata());
+    for(int i=1;i<115;i++) {
+      String h=await rootBundle.loadString('assets/qoran/${i}.txt');
+      ayalist = h.split('\n');
+      ayas.add(ayalist.length);
+
+    }
+    emit(AyaSuccessdata());
+    // print(ayas);
 
 
-    for(int i=0;i<=113;i++)
-      {
-        rootBundle.loadString('assets/qoran/${i+1}.txt').then((val){
-          h=val.split('\n');
-          ayalist.add(h.length);
-          emit(AyaLoadingdata());
-        });
 
-        emit(AyaSuccessdata());
-      }
-
-  }
+}
 
 
   List<String> surav=[];
