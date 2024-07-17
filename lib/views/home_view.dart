@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islamic/nav_taps/ahadec_tap.dart';
 
 import 'package:islamic/nav_taps/sebha_tap.dart';
+import 'package:islamic/nav_taps/setting.dart';
 import '../nav_taps/qoraan_tap.dart';
 import '../nav_taps/radio_tap.dart';
 
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const SebhaVeiw(),
     const AhadecView(),
      QoraanVeiw(),
+    const Setting(),
   ];
   int index=3;
 
@@ -61,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/images/sebha_blue.png')),label:'التسبيح',backgroundColor: Color(0xffB7935F) ),
               BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/images/quran-quran-svgrepo-com.png')),label:'الأحاديث' ,backgroundColor: Color(0xffB7935F)),
               BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/images/quran.png'),),label: 'القرأن',backgroundColor: Color(0xffB7935F)),
+              BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'الاعدادات',backgroundColor: Color(0xffB7935F)),
             ]),
 
 

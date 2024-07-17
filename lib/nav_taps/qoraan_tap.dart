@@ -34,7 +34,6 @@ class QoraanVeiw extends StatelessWidget {
   builder: (context, state) {
     var cubit=HadethCubit.get(context);
     var h=cubit.ayas;
-    print(h);
     if(state is AyaSuccessdata)
       {
         return Scaffold(
@@ -43,50 +42,73 @@ class QoraanVeiw extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(image: AssetImage('assets/images/Fanos.png')),
-                Divider(
-                  thickness: 3,
-                  color: Color(0xffB7935F),
-                ),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Spacer(flex: 1,),
-                    Text('عدد الأيات', style: TextStyle(
-                        fontFamily: 'ElMessiri', fontSize: 25),),
-                    Spacer(flex: 1,),
-                    Text('اسم السورة', style: TextStyle(
-                        fontFamily: 'ElMessiri', fontSize: 25),),
-                    Spacer(flex: 1,)
+                const Image(image: AssetImage('assets/images/Fanos.png')),
 
-                  ],
-                ),
-                Divider(
-                  thickness: 3,
-                  color: Color(0xffB7935F),
-                ),
                 Expanded(
-                  child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                  child:
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
 
-                      itemBuilder: (context, index) =>
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, ElsouraView.id,
-                                    arguments: QoranModel(
-                                        soraName: suras_ar[index],
-                                        index: index));
-                              },
-                              child: ItemQoranList(soraName: suras_ar[index],
-                                ayanums: '${h[index]}',)),
-                      itemCount:114 ),
+                        Column(
+                        children: [
+                          const Divider(
+                            thickness: 3,
+                            color: Color(0xffB7935F),
+                          ),
+                          const Row(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Spacer(flex: 1,),
+                              Text('عدد الأيات', style: TextStyle(
+                                  fontFamily: 'ElMessiri', fontSize: 25),),
+                              Spacer(flex: 1,),
+                              Text('اسم السورة', style: TextStyle(
+                                  fontFamily: 'ElMessiri', fontSize: 25),),
+                              Spacer(flex: 1,)
+
+                            ],
+                          ),
+                          const Divider(
+                            thickness: 3,
+                            color: Color(0xffB7935F),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushNamed(context, ElsouraView.id,
+                                              arguments: QoranModel(
+                                                  soraName: suras_ar[index],
+                                                  index: index));
+                                        },
+                                        child: ItemQoranList(soraName: suras_ar[index],
+                                          ayanums: '${h[index]}',)),
+                                itemCount:114 ),
+                          )
+                        ],
+                      ),
+                      const Center(child: VerticalDivider(color: Color(0xffB7935F),width: 3,thickness: 3,indent: 8,))
+
+
+
+
+
+                  ]),
                 )
+
+
+
+
               ],
             )
         );
       }
     else{
-      return Center(child: CircularProgressIndicator(color: Colors.orange,));
+      return const Center(child: CircularProgressIndicator(color: Colors.orange,));
     }
   },
 );
